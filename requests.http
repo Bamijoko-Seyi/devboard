@@ -1,0 +1,29 @@
+### Register a new user — expect 201 Created
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "oluwa@example.com",
+  "password": "password123",
+  "displayName": "Oluwa"
+}
+
+### Duplicate email — expect 409 Conflict
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "oluwa@example.com",
+  "password": "password123",
+  "displayName": "Oluwa"
+}
+
+### Invalid input — expect 400 Bad Request
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "notanemail",
+  "password": "short",
+  "displayName": ""
+}
