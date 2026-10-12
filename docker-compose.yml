@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:16
+    container_name: devboard-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-dev}
+      POSTGRES_DB: devboard
+    ports:
+      - "5432:5432"
+    volumes:
+      - devboard-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d devboard"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: .
+    container_name: devboard-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/devboard
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-dev}
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-must-be-at-least-32-characters-long-ok}
+      JWT_EXPIRATION_MS: ${JWT_EXPIRATION_MS:-86400000}
+    ports:
+      - "8080:8080"
+
+volumes:
+  devboard-data:
