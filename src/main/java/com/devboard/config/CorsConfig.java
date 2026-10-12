@@ -16,7 +16,7 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOriginPatterns(List.of(
                 "http://localhost:5173",
-                "https://devboard-ui.vercel.app"
+                "https://*.vercel.app"
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
