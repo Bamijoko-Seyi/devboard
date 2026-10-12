@@ -7,6 +7,9 @@ WORKDIR /app
 COPY .mvn/ .mvn/
 COPY mvnw pom.xml ./
 
+# Make wrapper executable (Git strips +x on Windows commits)
+RUN chmod +x mvnw
+
 # Download dependencies — cached until pom.xml changes
 RUN ./mvnw -B dependency:go-offline
 
@@ -19,11 +22,9 @@ FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
-# Non-root user for security
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring
 
-# Copy the built JAR from the build stage
 COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080
