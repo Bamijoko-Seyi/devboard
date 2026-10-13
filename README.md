@@ -141,11 +141,11 @@ Coverage report: `target/site/jacoco/index.html`
 - Rate limiting on auth endpoints
 
 ## Screenshots
-    ![Login Page](./docs/Screenshot1.png)
-    ![Project List](./docs/Screenshot2.png)
-    ![Invitations Page](./docs/Screenshot3.png)
-    ![Project Detail 1](./docs/Screenshot4.png)
-    ![Project Detail 2](./docs/Screenshot5.png)
+![Login Page](./docs/Screenshot1.png)
+![Project List](./docs/Screenshot2.png)
+![Invitations Page](./docs/Screenshot3.png)
+![Project Detail 1](./docs/Screenshot4.png)
+![Project Detail 2](./docs/Screenshot5.png)
 
 
 ## License
